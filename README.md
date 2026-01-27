@@ -20,4 +20,4 @@ This tool emulates the .NET 8 `Random.Shuffle` behavior:
 - **Engine**: Ports C# `System.Random` logic directly to JavaScript for 100% compatibility.
 
 ## 🖼️ Reference
-The interface includes a high-resolution reference image (`image.png`) to help you compare note placements while you search.
+The interface includes **`image.png`**, which provides a step-by-step visual guide on how to apply the discovered seed back into the **Qwilight** game settings. It explains exactly where to input the seed value to reproduce the desired note arrangement.
