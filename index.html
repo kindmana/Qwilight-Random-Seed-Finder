@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwilight Random Seed Finder</title> <style>
+    <title>Qwilight Random Seed Finder</title>
+    <style>
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             margin: 0;
@@ -15,7 +16,6 @@
             min-height: 100vh;
         }
 
-        /* 상단 입력 영역 */
         .header-section {
             padding: 40px 20px;
             text-align: center;
@@ -74,7 +74,6 @@
             min-height: 30px;
         }
 
-        /* 하단 이미지 영역 */
         .image-section {
             flex-grow: 1;
             display: flex;
@@ -98,13 +97,14 @@
 <body>
 
     <div class="header-section">
-        <h2>Qwilight Random Seed Finder</h2> <div class="description">
+        <h2>Qwilight Random Seed Finder</h2>
+        <div class="description">
             바꾸고 싶은 배치를 입력하면 시드를 찾아줍니다.<br>
             (ex: 데님 제거하고 싶어요 => 1357246 입력)
         </div>
         
         <div class="input-group">
-            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="9">
+            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="9" onkeyup="if(window.event.keyCode==13){findSeed()}">
             <button onclick="findSeed()">시드 찾기</button>
         </div>
         
@@ -116,7 +116,6 @@
     </div>
 
     <script>
-        // C# System.Random 호환 클래스
         class DotNetRandom {
             constructor(seed) {
                 this.seedArray = new Array(56);
@@ -164,14 +163,12 @@
             const target = Array.from({length: n}, (_, i) => i + 1);
             resDiv.innerText = "탐색 중...";
 
-            // 브라우저 렌더링을 위해 잠깐 지연 후 계산 시작
             setTimeout(() => {
                 let found = false;
                 for (let seed = 0; seed < 2147483647; seed++) {
                     let rng = new DotNetRandom(seed);
                     let current = input.split('').map(Number);
 
-                    // 순방향 셔플 로직 적용
                     for (let i = 0; i < n - 1; i++) {
                         let j = rng.next(i, n);
                         [current[i], current[j]] = [current[j], current[i]];
