@@ -12,12 +12,15 @@
     <div class="header-section">
         <h2>Qwilight Random Seed Finder</h2>
         <div class="description">
-            바꾸고 싶은 배치를 입력하면 시드를 찾아줍니다.<br>
-            (ex: 데님 제거하고 싶어요 => 1357246 입력)
+            바꾸고 싶은 배치를 입력하면 시드를 찾아줍니다<br>
+            ex: 데님 제거하고 싶어요 => 1357246 입력
+        </div>
+        <div class="notice">
+            랜덤 시드 파인더는 9키 이하의 키에서만 사용 가능합니다
         </div>
         
         <div class="input-group">
-            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="9" onkeyup="if(window.event.keyCode==13){findSeed()}">
+            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="15" onkeyup="if(window.event.keyCode==13){findSeed()}">
             <button onclick="findSeed()">시드 찾기</button>
         </div>
         
@@ -31,3 +34,4 @@
     <script src="static/script.js"></script>
 </body>
 </html>
+
