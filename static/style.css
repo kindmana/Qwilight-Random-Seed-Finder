@@ -27,6 +27,13 @@ h2 { color: #333; margin-bottom: 10px; }
     line-height: 1.5;
 }
 
+.notice {
+    color: #d9534f;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
 .input-group {
     display: flex;
     justify-content: center;
