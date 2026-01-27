@@ -29,9 +29,16 @@
         
         .description {
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+
+        .notice {
+            color: #d9534f;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
         }
 
         .input-group {
@@ -100,11 +107,14 @@
         <h2>Qwilight Random Seed Finder</h2>
         <div class="description">
             바꾸고 싶은 배치를 입력하면 시드를 찾아줍니다.<br>
-            (ex: 데님 제거하고 싶어요 => 1357246 입력)
+            ex: 데님 제거하고 싶어요 => 1357246 입력
+        </div>
+        <div class="notice">
+            랜덤 시드 파인더는 9키 이하의 키에서만 사용 가능합니다.
         </div>
         
         <div class="input-group">
-            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="9" onkeyup="if(window.event.keyCode==13){findSeed()}">
+            <input type="text" id="inputVal" placeholder="ex) 1357246" maxlength="15" onkeyup="if(window.event.keyCode==13){findSeed()}">
             <button onclick="findSeed()">시드 찾기</button>
         </div>
         
@@ -154,12 +164,21 @@
         }
 
         function findSeed() {
-            const input = document.getElementById('inputVal').value;
+            const input = document.getElementById('inputVal').value.trim();
             const resDiv = document.getElementById('result');
             
             if (!input) return;
 
+            // --- 유효성 검사 로직 추가 ---
             const n = input.length;
+            const hasDuplicate = new Set(input).size !== n; // 중복 확인
+            
+            if (n > 9 || hasDuplicate || isNaN(input)) {
+                resDiv.innerText = "잘못된 배치입니다. 다시 입력해 주세요";
+                return;
+            }
+            // ---------------------------
+
             const target = Array.from({length: n}, (_, i) => i + 1);
             resDiv.innerText = "탐색 중...";
 
