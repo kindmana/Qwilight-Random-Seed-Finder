@@ -36,12 +36,20 @@ class DotNetRandom {
 }
 
 function findSeed() {
-    const input = document.getElementById('inputVal').value;
+    const inputVal = document.getElementById('inputVal');
+    const input = inputVal.value.trim();
     const resDiv = document.getElementById('result');
     
     if (!input) return;
 
     const n = input.length;
+    const hasDuplicate = new Set(input).size !== n;
+    
+    if (n > 9 || hasDuplicate || isNaN(input)) {
+        resDiv.innerText = "잘못된 배치입니다. 다시 입력해 주세요";
+        return;
+    }
+
     const target = Array.from({length: n}, (_, i) => i + 1);
     resDiv.innerText = "탐색 중...";
 
