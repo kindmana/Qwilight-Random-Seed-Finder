@@ -43,9 +43,11 @@ function findSeed() {
     if (!input) return;
 
     const n = input.length;
-    const hasDuplicate = new Set(input).size !== n;
+    const inputNumbers = input.split('').map(Number);
+    const hasDuplicate = new Set(inputNumbers).size !== n;
+    const isOutOfRange = inputNumbers.some(num => num < 1 || num > n);
     
-    if (n > 9 || hasDuplicate || isNaN(input)) {
+    if (n > 9 || hasDuplicate || isNaN(input) || isOutOfRange) {
         resDiv.innerText = "잘못된 배치입니다. 다시 입력해 주세요";
         return;
     }
@@ -57,7 +59,7 @@ function findSeed() {
         let found = false;
         for (let seed = 0; seed < 2147483647; seed++) {
             let rng = new DotNetRandom(seed);
-            let current = input.split('').map(Number);
+            let current = [...inputNumbers]; 
 
             for (let i = 0; i < n - 1; i++) {
                 let j = rng.next(i, n);
